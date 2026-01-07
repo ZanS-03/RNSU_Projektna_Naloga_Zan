@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './core/interceptors/auth-interceptor';
 
 import { Login } from './features/authentication/pages/login/login';
 import { Signup } from './features/authentication/pages/signup/signup';
@@ -18,7 +20,7 @@ import { Navbar } from './shared/components/navbar/navbar';
     Signup,
     Game,
     Scores,
-    Navbar
+    Navbar,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { Navbar } from './shared/components/navbar/navbar';
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection()
+    provideZonelessChangeDetection(),
+    provideHttpClient(withInterceptors([authInterceptor]))
   ],
   bootstrap: [App]
 })

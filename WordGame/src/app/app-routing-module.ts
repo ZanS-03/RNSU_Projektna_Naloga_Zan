@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth-guard';
 
 import { Login } from './features/authentication/pages/login/login';
 import { Signup } from './features/authentication/pages/signup/signup';
@@ -9,10 +10,10 @@ import { Scores } from './features/scores/pages/scores/scores';
 const routes: Routes = [
   { path: 'login', component: Login },
   { path: 'signup', component: Signup },
-  { path: 'game', component: Game },
-  { path: 'scores', component: Scores },
+  { path: 'game', component: Game, canActivate: [authGuard] },
+  { path: 'scores', component: Scores, canActivate: [authGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' }
+  { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({
