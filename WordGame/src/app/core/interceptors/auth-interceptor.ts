@@ -7,7 +7,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = authService.getToken();
 
   //tukaj naj bi logika za jwt delovala ampak zaradi CORS napake ne dela, zato sem odstranil dodajanje tokena za domeno
-  if (req.url.includes('random-word-api.herokuapp.com')) {
+  if (req.url.includes('random-word-api.vercel.app')) {
     return next(req);
   }
 

@@ -23,8 +23,7 @@ export class Game {
   ) {}
 
   public newWord(): void {
-    // če je že aktivna beseda in user klikne "New word", to je skip
-    if (this.hasActiveWord) {
+    if (this.hasActiveWord) { //preveri ce je igra ze aktivna in skipa
       this.skippedGames++;
     }
 
@@ -34,7 +33,7 @@ export class Game {
       this.userGuess = '';
       this.feedback = 'Type your answer and click Confirm.';
 
-      this.hasActiveWord = true; // od tu naprej je "runda" aktivna
+      this.hasActiveWord = true; // od tuki naprej je igra aktivna
       this.cdr.detectChanges();
     });
   }
@@ -54,10 +53,10 @@ public confirm(): void {
 
   if (guess === this.originalWord) {
     this.successfulGames++;
-    this.feedback = '✅ Correct! Click "New word" for the next word.';
-    this.hasActiveWord = false; // runda se zaključi, da ne šteješ success večkrat
+    this.feedback = '🟢Correct! Click "New word" for the next word.🟢';
+    this.hasActiveWord = false; // igra se konca
   } else {
-    this.feedback = '❌ Wrong. Try again.';
+    this.feedback = '🔴Wrong. Try again.🔴';
   }
 }
 
