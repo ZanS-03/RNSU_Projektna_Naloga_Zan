@@ -1,5 +1,12 @@
 <div class="container py-4">
-  <h2>Scores page works</h2>
+  <h2>Scores</h2>
+
+  <div class="card p-4">
+  <div class="mb-2"><strong>Games played:</strong> {{ totalGames() }}</div>
+  <div class="mb-2"><strong>Correct answers:</strong> {{ state.successful }}</div>
+  <div class="mb-2"><strong>Skipped words:</strong> {{ state.skipped }}</div>
+  <div class="mb-3"><strong>Accuracy:</strong> {{ accuracy() }}%</div>
+
+    <button class="btn btn-outline-danger" (click)="reset()">Reset scores</button>
+  </div>
 </div>
-
-
