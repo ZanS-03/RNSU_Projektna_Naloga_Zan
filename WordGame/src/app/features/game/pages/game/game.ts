@@ -3,18 +3,21 @@ import { WordService } from '../../../../core/services/word';
 import { ScoreService } from '../../../../core/services/score';
 
 @Component({
+
   selector: 'app-game',
   standalone: false,
   templateUrl: './game.html',
   styleUrl: './game.css',
+
 })
+
 export class Game {
+
   public originalWord: string = '';
   public scrambledWord: string = '';
   public userGuess: string = '';
   public feedback: string = 'Click "New word" to start.';
 
-  // SESSION (resetira se ob refreshu)
   public sessionSuccessful: number = 0;
   public sessionSkipped: number = 0;
 
@@ -27,10 +30,11 @@ export class Game {
   ) {}
 
   public newWord(): void {
-    // Če že ima aktivno besedo, to pomeni "skip"
+    
     if (this.hasActiveWord) {
       this.sessionSkipped++;
       const s = this.scoreService.incSkipped();
+
     }
 
     this.wordService.getRandomWord().subscribe((word) => {
@@ -40,7 +44,6 @@ export class Game {
       this.feedback = 'Type your answer and click Confirm.';
       this.hasActiveWord = true;
 
-      // če imaš še vedno tvoj UI timing issue, pusti to
       this.cdr.detectChanges();
     });
   }
@@ -70,13 +73,21 @@ export class Game {
   }
 
   private scramble(word: string): string {
+
     const arr = word.split('');
+
     for (let i = arr.length - 1; i > 0; i--) {
+
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
+
     }
+
     const mixed = arr.join('');
+
     if (mixed === word && word.length > 1) return this.scramble(word);
+    
     return mixed;
+
   }
 }

@@ -1,34 +1,76 @@
-<div class="row justify-content-center">
-  <div class="col-12 col-md-6 col-lg-5">
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <h3 class="mb-3">Signup</h3>
+<div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 85vh;">
 
-        <form>
-          <div class="mb-3">
-            <label class="form-label">Username</label>
-            <input class="form-control" type="text" placeholder="zan123">
-          </div>
+  <form
+    (ngSubmit)="onSubmit(signupForm)"
+    #signupForm="ngForm"
+    class="card p-4 w-100"
+    style="max-width: 700px; border-radius: 15px;"
+  >
+    <h1 class="text-center mb-4" style="font-size: 28px;">REGISTRACIJA</h1>
 
-          <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input class="form-control" type="email" placeholder="you@example.com">
-          </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email naslov</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Vnesi email naslov"
+        [(ngModel)]="email"
+        #emailCtrl="ngModel"
+        required
+        [ngClass]="{
+          'is-invalid': emailCtrl.invalid && (emailCtrl.touched || emailCtrl.dirty || signupForm.submitted),
+          'is-valid': emailCtrl.valid && (emailCtrl.touched || emailCtrl.dirty || signupForm.submitted)
+        }"
+      >
 
-          <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input class="form-control" type="password" placeholder="••••••">
-          </div>
-
-          <button class="btn btn-success w-100" type="button">Create account</button>
-
-          <div class="mt-3 text-center">
-            <a routerLink="/login">Already have an account? Login</a>
-          </div>
-        </form>
-
-      </div>
+      @if (emailCtrl.invalid && (emailCtrl.touched || emailCtrl.dirty || signupForm.submitted)) {
+        <div class="invalid-feedback d-block">Polje je obvezno!</div>
+      }
     </div>
-  </div>
-</div>
 
+    <div class="mb-4">
+      <label for="password" class="form-label">Geslo</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Vnesi geslo (min 4 znaki)"
+        [(ngModel)]="password"
+        #passCtrl="ngModel"
+        required
+        minlength="4"
+        [ngClass]="{
+          'is-invalid': passCtrl.invalid && (passCtrl.touched || passCtrl.dirty || signupForm.submitted),
+          'is-valid': passCtrl.valid && (passCtrl.touched || passCtrl.dirty || signupForm.submitted)
+        }"
+      >
+
+      @if (passCtrl.invalid && (passCtrl.touched || passCtrl.dirty || signupForm.submitted)) {
+        <div class="invalid-feedback d-block">
+          Polje je obvezno (min 4).
+        </div>
+      }
+    </div>
+
+    @if (errorMessage) {
+      <div class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <div class="d-grid">
+      <button [disabled]="signupForm.invalid" class="btn btn-success btn-lg" type="submit">
+        Registracija
+      </button>
+    </div>
+
+    <p class="text-center mt-3 mb-0">
+      Že imaš račun?
+      <a routerLink="/login" class="text-success text-decoration-none fw-semibold">Prijava</a>
+    </p>
+  </form>
+
+</div>

@@ -33,12 +33,12 @@ export class Login {
       return;
     }
 
-    const success = this.authService.login(this.email, this.password);
+    const result = this.authService.login(this.email, this.password);
 
-    if (success) {
+    if (result.ok) {
       this.router.navigate(['/game']);
     } else {
-      this.errorMessage = 'Prijava ni uspela.';
+      this.errorMessage = result.message;
     }
   }
 }
