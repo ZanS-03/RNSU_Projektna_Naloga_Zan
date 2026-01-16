@@ -65,10 +65,10 @@ export class Game {
       this.sessionSuccessful++;
       const s = this.scoreService.incSuccessful();
 
-      this.feedback = '✅ Correct! Click "New word" for the next word.';
-      this.hasActiveWord = false; // igra končana
+      this.feedback = 'Correct! Click "New word" for the next word.';
+      this.hasActiveWord = false;
     } else {
-      this.feedback = '❌ Wrong. Try again.';
+      this.feedback = 'Wrong. Try again.';
     }
   }
 

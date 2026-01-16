@@ -35,5 +35,14 @@ export class Signup {
 
     const result = this.authService.signup(this.email, this.password);
 
+    if (!result.ok) {
+      this.errorMessage = result.message;
+      return;
+    }
+
+    this.errorMessage = result.message;
+
+    signupForm.resetForm();
+
   }
 }

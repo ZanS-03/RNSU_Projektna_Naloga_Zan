@@ -58,7 +58,7 @@ export class AuthService {
 
     if (!email || !password){
 
-      return { ok: false, message: 'Email and password are required.' };
+      return { ok: false, message: 'Vpisite email in geslo.' };
 
     }
 
@@ -68,14 +68,14 @@ export class AuthService {
 
     if (exists) {
 
-      return { ok: false, message: 'User with this email already exists.' };
+      return { ok: false, message: 'Uporabnik s tem emailom ze obstaja.' };
 
     }
 
     users.push({ email, password });
     this.setUsers(users);
 
-    return { ok: true, message: 'Account created. You can now log in.' };
+    return { ok: true, message: 'Racun ustvarjen. Lahko se prijavite.' };
 
 
 
@@ -89,7 +89,7 @@ export class AuthService {
 
     if (!email || !password) {
 
-      return { ok: false, message: 'Email and password are required.' };
+      return { ok: false, message: 'Vpisite email in geslo.' };
     }
 
     const users = this.getUsers();
@@ -97,7 +97,7 @@ export class AuthService {
 
     if (!match) {
 
-      return { ok: false, message: 'Invalid email or password.' };
+      return { ok: false, message: 'Napacno geslo ali email.' };
 
     }
 
@@ -105,7 +105,7 @@ export class AuthService {
 
     localStorage.setItem(this.tokenKey, fakeToken);
 
-    return { ok: true, message: 'Logged in.' };
+    return { ok: true, message: 'Prijavljen.' };
 
   }
 
