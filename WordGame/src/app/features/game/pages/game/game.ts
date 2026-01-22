@@ -33,7 +33,7 @@ export class Game {
     
     if (this.hasActiveWord) {
       this.sessionSkipped++;
-      const s = this.scoreService.incSkipped();
+      this.scoreService.incSkipped();
 
     }
 
@@ -44,7 +44,7 @@ export class Game {
       this.feedback = 'Type your answer and click Confirm.';
       this.hasActiveWord = true;
 
-      this.cdr.detectChanges();
+      this.cdr.detectChanges(); //osvezi ui
     });
   }
 
@@ -63,7 +63,7 @@ export class Game {
 
     if (guess === this.originalWord) {
       this.sessionSuccessful++;
-      const s = this.scoreService.incSuccessful();
+      this.scoreService.incSuccessful();
 
       this.feedback = 'Correct! Click "New word" for the next word.';
       this.hasActiveWord = false;
